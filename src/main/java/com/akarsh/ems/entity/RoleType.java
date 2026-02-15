@@ -1,6 +1,10 @@
 package com.akarsh.ems.entity;
 
 public enum RoleType {
-    ADMIN,
-    EMPLOYEE
-}
+        SUPER_ADMIN,
+        HR,
+        MANAGER,
+        EMPLOYEE,
+    ADMIN
+    }
+

@@ -22,7 +22,7 @@ public class DataInitializer {
         return args -> {
 
             // create ADMIN role if not exists
-            Role adminRole = roleRepository.findByName(RoleType.ADMIN)
+            roleRepository.findByName(RoleType.ADMIN)
                     .orElseGet(() -> roleRepository.save(
                             Role.builder().name(RoleType.ADMIN).build()
                     ));
@@ -32,18 +32,36 @@ public class DataInitializer {
                     .orElseGet(() -> roleRepository.save(
                             Role.builder().name(RoleType.EMPLOYEE).build()
                     ));
+            roleRepository.findByName(RoleType.HR)
+                    .orElseGet(() -> roleRepository.save(
+                            Role.builder().name(RoleType.HR).build()
+                    ));
+            Role superAdmin = roleRepository.findByName(RoleType.SUPER_ADMIN)
+                    .orElseGet(() -> roleRepository.save(
+                            Role.builder().name(RoleType.SUPER_ADMIN).build()
+                    ));
+            roleRepository.findByName(RoleType.MANAGER)
+                    .orElseGet(() -> roleRepository.save(
+                            Role.builder().name(RoleType.MANAGER).build()
+                    ));
 
-            // create default admin user
+
+
+
+            Role superAdminRole = roleRepository.findByName(RoleType.SUPER_ADMIN).get();
+
             if (userRepository.findByEmail("admin@ems.com").isEmpty()) {
                 User admin = User.builder()
                         .email("admin@ems.com")
-                        .password("admin123") // plain password for now
-                        .role(adminRole)
+                        .password("admin123")
+                        .firstName("System")
+                        .lastName("Admin")
+                        .role(superAdminRole)
                         .enabled(true)
                         .build();
 
                 userRepository.save(admin);
-                System.out.println("ADMIN USER CREATED: admin@ems.com / admin123");
+                System.out.println("SUPER ADMIN CREATED");
             }
         };
     }

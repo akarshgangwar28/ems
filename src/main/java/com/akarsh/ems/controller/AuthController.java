@@ -2,8 +2,11 @@ package com.akarsh.ems.controller;
 
 import com.akarsh.ems.dto.LoginRequest;
 import com.akarsh.ems.dto.LoginResponse;
+import com.akarsh.ems.dto.RegisterRequest;
 import com.akarsh.ems.response.ApiResponse;
 import com.akarsh.ems.service.AuthService;
+import com.akarsh.ems.service.UserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +16,15 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserService userService;
 
     @PostMapping("/login")
     public ApiResponse<LoginResponse> login(@RequestBody LoginRequest request) {
         String token = authService.login(request);
         return ApiResponse.success("Login successful", new LoginResponse(token));
     }
+
+
+
 
 }
