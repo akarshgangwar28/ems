@@ -56,19 +56,21 @@ public class UserServiceImpl implements UserService {
                 .getAuthentication()
                 .getName();
 
-        System.out.println("TOKEN EMAIL = " + email);
-
-
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
 
         return new ProfileResponse(
                 user.getEmail(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getRole().getName().name(),
-                user.getDepartment().getName()
+                user.getDepartment() == null ? null : user.getDepartment().getName(),
+                user.getCtc(),
+                user.getInHandSalary(),
+                user.getDateOfJoining(),
+                user.getPhone(),
+                user.getStatus(),
+                user.getAddress()
         );
     }
 }

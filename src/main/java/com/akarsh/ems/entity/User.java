@@ -3,6 +3,8 @@ package com.akarsh.ems.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -35,6 +37,32 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Column(nullable = false, unique = true)
+    private String phone;
+
+    @Column
+    private String designation;
+
+    @Column
+    private String status;
+
+    @Column
+    private Date dateOfJoining;
+
+    @Column
+    private Date createdAt;
+
+    @Column
+    private Date updatedAt;
+
+    @Column
+    private String ctc;
+
+    @Column
+    private String inHandSalary;
+
+    @Column
+    private String address;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
