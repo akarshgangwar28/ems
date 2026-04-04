@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ems
-    username: ems_user
-    password: ems_pass
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ems}
+    username: ${DB_USERNAME:ems_user}
+    password: ${DB_PASSWORD:ems_pass}
     driver-class-name: org.postgresql.Driver
 
   jpa:
